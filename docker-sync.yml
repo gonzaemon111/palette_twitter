@@ -1,0 +1,16 @@
+version: '2'
+options:
+  verbose: true
+  max-attempt: 30
+syncs:
+  palette_twitter_dir:
+    src: '.'
+    notify_terminal: true
+    sync_host_ip: '0.0.0.0'
+    sync_host_port: '5001'
+    sync_strategy: 'unison'
+    sync_userid: '3000'
+    sync_excludes: [
+      'coverage', '.git', '.gitignore', 'package.json',
+      log', 'tmp', '.cache/','.bundle', '.bash_history', 'package.json'
+    ]

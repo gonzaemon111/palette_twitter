@@ -1,0 +1,35 @@
+version: "3"
+services:
+  palette_twitter_db:
+    image: mysql:5.7
+    ports:
+      - "3306:3306"
+      - "33060:33060"
+    command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_SOCKET: "/var/lib/mysql/mysql.sock"
+      MYSQL_HOST: palette_twitter_db
+  palette_twitter_redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+  palette_twitter:
+    build: .
+    container_name: palette_twitter
+    tty: true #標準出力on
+    stdin_open: true
+    depends_on:
+      - palette_twitter_db
+    ports:
+      - "3001:3000"
+    volumes:
+      - palette_twitter_dir:/home/palette_twitter
+    command: >
+              bash -c '
+              rm -f tmp/pids/server.pid &&
+              bundle exec rails server -b 0.0.0.0'
+  
+volumes:
+  palette_twitter_dir:
+    external: true
