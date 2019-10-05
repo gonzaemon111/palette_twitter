@@ -1,19 +1,25 @@
 class UsersController < ApplicationController
 
   def new
-    Rails.logger.debug "hogehoge"
+    Rails.logger.debug "cookies : #{cookies.inspect}"
+    Rails.logger.debug "cookies : #{cookies[:token]}"
+    @user = User.new
   end
 
-  def sign_in
-    user = User.new(users_params)
-    if user.save
+  def signin
+  end
+
+  def signup
+    user = ::Users::NewUsecase.new(users_params).execute
+    if user
+      sign_in(user[:token])
+      Rails.logger.debug ""
+      redirect_to "/"
     else
-      redirect_to 
+      # flash.now[:danger] = t('.flash.invalid_password')
+      flash.now[:danger] = "hogehoge"
+      redirect_to users_sign_up_path
     end
-  end
-
-  def sign_up
-    
   end
 
   def show
@@ -28,11 +34,14 @@ class UsersController < ApplicationController
 
   def users_params
     params
-      .require(:users)
+      .require(:user)
       .permit(
         :email,
         :password,
-        :nickname
+        :password_confirmation,
+        :nickname,
+        :content,
+        :title
       )
   end
 end
