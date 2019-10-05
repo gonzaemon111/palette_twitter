@@ -1,0 +1,14 @@
+.hoge {
+  // border: 1px solid #aaa;
+  position: relative;
+  height: 600px;
+  width: 900px;
+  margin: auto;
+  .sign_up_form {
+    padding: 50px;              /* 余白指定 */
+    // text-align:  center;        /* 中央寄せ */
+    // background-color:  #ddd;    /* 背景色指定 */
+    height: 300px;              /* 高さ指定 */
+    margin: auto;
+  }
+}
