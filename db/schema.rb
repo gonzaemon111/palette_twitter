@@ -25,9 +25,10 @@ ActiveRecord::Schema.define(version: 2019_10_04_122859) do
     t.string "email", null: false, comment: "Eメールアドレス"
     t.string "password_digest", null: false, comment: "パスワード"
     t.string "nickname", default: "", null: false, comment: "ニックネーム"
+    t.string "token", null: false, comment: "トークン"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["email", "password_digest"], name: "complex_unique_uid", unique: true
+    t.index ["email", "password_digest"], name: "complex_unique_uid"
     t.index ["nickname"], name: "index_users_on_nickname"
   end
 
