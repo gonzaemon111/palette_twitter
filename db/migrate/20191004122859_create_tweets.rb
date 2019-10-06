@@ -3,6 +3,7 @@ class CreateTweets < ActiveRecord::Migration[5.2]
     create_table :tweets do |t|
       t.references :users, index: true, null: false, comment: "ユーザーID"
       t.string :content, index: true, null: false, default: "", comment: "内容"
+      t.text :image, comment: "画像"
 
       t.timestamps
     end
