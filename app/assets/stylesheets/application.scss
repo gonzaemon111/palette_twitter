@@ -1,4 +1,13 @@
 // Custom bootstrap variables must be set or imported *before* bootstrap.
+body {
+  height: 100vh;
+  .main {
+    background-color: azure;
+  }
+}
+ul {
+  list-style: none;
+}
 @import "bootstrap";
 @import "./sign_up";
 @import "./tweets";
