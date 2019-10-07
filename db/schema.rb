@@ -13,12 +13,13 @@
 ActiveRecord::Schema.define(version: 2019_10_04_122859) do
 
   create_table "tweets", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.bigint "users_id", null: false, comment: "ユーザーID"
+    t.bigint "user_id", null: false, comment: "ユーザーID"
     t.string "content", default: "", null: false, comment: "内容"
+    t.text "image", comment: "画像"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["content"], name: "index_tweets_on_content"
-    t.index ["users_id"], name: "index_tweets_on_users_id"
+    t.index ["user_id"], name: "index_tweets_on_user_id"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
@@ -32,4 +33,5 @@ ActiveRecord::Schema.define(version: 2019_10_04_122859) do
     t.index ["nickname"], name: "index_users_on_nickname"
   end
 
+  add_foreign_key "tweets", "users"
 end
