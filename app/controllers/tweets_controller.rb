@@ -11,6 +11,36 @@ class TweetsController < ApplicationController
 
   def create
     Rails.logger.debug "params: #{params}"
-    redirect_to "/"
+    Rails.logger.debug "current_user: #{current_user}"
+    tweet = Tweet.new(tweet_params)
+    if tweet.save
+      Rails.logger.debug "1"
+      redirect_to tweets_path
+    else
+      Rails.logger.debug "2"
+      redirect_to tweets_path
+    end
+  end
+
+  def show
+    
+  end
+
+  private
+
+  def set_tweet
+    @tweet = Tweet.find(params[:id])
+  end
+  
+  def tweet_params
+    params
+      .require(:tweet)
+      .permit(
+        :content,
+        :image
+      )
+      .merge(
+        user_id: current_user.id
+      )
   end
 end
