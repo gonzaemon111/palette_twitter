@@ -1,8 +1,13 @@
 // Custom bootstrap variables must be set or imported *before* bootstrap.
 body {
+  min-height: 100vh;
+  min-width: 100vw;
   height: 100vh;
+  width: 100vw;
   .main {
     background-color: azure;
+    height: 100%;
+    width: 100%;
   }
 }
 ul {
