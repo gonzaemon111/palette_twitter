@@ -1,39 +1,24 @@
 <div class="tweets_list">
   <div class="list-group">
     <ul>
-      <li>
-        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
-          <div class="d-flex w-100 justify-content-between">
-            <h5 class="mb-1">List group item heading</h5>
-            <small>3 days ago</small>
-          </div>
-          <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-          <small>Donec id elit non mi porta.</small>
-          <br>
-          <%= image_tag 'github.png', :size =>'48x32' %>
-          <%= image_tag('/github.png') %>
-        </a>
-      </li>
-      <li>
-        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-          <div class="d-flex w-100 justify-content-between">
-            <h5 class="mb-1">List group item heading</h5>
-            <small class="text-muted">3 days ago</small>
-          </div>
-          <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-          <small class="text-muted">Donec id elit non mi porta.</small>
-        </a>
-      </li>
-      <li>
-        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-          <div class="d-flex w-100 justify-content-between">
-            <h5 class="mb-1">List group item heading</h5>
-            <small class="text-muted">3 days ago</small>
-          </div>
-          <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-          <small class="text-muted">Donec id elit non mi porta.</small>
-        </a>
-      </li>
+      <% unless @tweets.empty?%>
+        <% @tweets.each do |tweet| %>
+        <li class="list_item">
+          <a href="/tweets/<%= tweet.id%>" class="list-group-item list-group-item-action flex-column align-items-start">
+            <div class="d-flex w-100 justify-content-between">
+              <h5 class="mb-1"><%= tweet.content %></h5>
+              <small><%= tweet.updated_at %></small>
+            </div>
+            
+            <small> <%= User.find(tweet.user_id).nickname %> </small>
+            <br>
+            <% if tweet.image.present? %>
+              <%= image_tag 'github.png', :size =>'160x120' %>
+            <% end %>
+          </a>
+        </li>
+        <% end %>
+      <% end %>
     </ul>
   </div>
 </div>
