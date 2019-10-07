@@ -25,6 +25,7 @@ gem "docker-sync", "0.5.9"
 gem "sidekiq"
 gem "redis-namespace"
 gem 'image_processing'
+gem "draper"
 
 group :development, :test do
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
