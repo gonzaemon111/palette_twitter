@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   post "users/signup", to: "users#signup"
   get "users/signin", to: "users#signin_input"
   post "users/signin", to: "users#signin"
+  delete "users/signout", to: "users#signout"
   resources :users, only: %i[show update destroy]
   resources :tweets
 end
