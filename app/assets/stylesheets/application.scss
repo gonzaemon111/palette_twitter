@@ -16,6 +16,9 @@ ul {
 .button_center {
   text-align: center;
 }
+.box_padding {
+  padding-bottom: 1rem;
+}
 @import "bootstrap";
 @import "./sign_up";
 @import "./tweets";
