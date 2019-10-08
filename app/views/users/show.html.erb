@@ -1,4 +1,21 @@
-<div>
-  <p>hogehoge</p>
-  <p><%= @current_user.to_yaml %></p>
+<div class="hoge">
+  <h2 style="padding:20px;"> <%= @current_user.nickname %>'s page </h2>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Nickname</th>
+        <th scope="col">Tweet Count</th>
+        <th scope="col">Last Tweet</th>
+        <th scope="col">Follow User Count</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row" class="align-middle"> <%= @current_user.nickname %> </th>
+        <td class="align-middle"> <%= @current_user.tweets.count %> </td>
+        <td class="align-middle"> <%= @current_user.tweets.last.created_at %> </td>
+        <td class="align-middle"> ここは後から </td>
+      </tr>
+    </tbody>
+  </table>
 </div>

@@ -13,6 +13,9 @@ body {
 ul {
   list-style: none;
 }
+.button_center {
+  text-align: center;
+}
 @import "bootstrap";
 @import "./sign_up";
 @import "./tweets";

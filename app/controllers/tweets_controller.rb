@@ -1,4 +1,5 @@
 class TweetsController < ApplicationController
+  before_action :set_tweet, only: %i[show]
   def index
     tweets = Tweet.all.order(:updated_at)
     @tweets = TweetDecorator.decorate_collection(tweets)
