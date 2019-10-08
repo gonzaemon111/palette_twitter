@@ -16,9 +16,11 @@ ActiveRecord::Schema.define(version: 2019_10_04_122859) do
     t.bigint "user_id", null: false, comment: "ユーザーID"
     t.string "content", default: "", null: false, comment: "内容"
     t.text "image_data", comment: "画像"
+    t.integer "tid", default: 0, null: false, comment: "ツイート ID"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["content"], name: "index_tweets_on_content"
+    t.index ["tid"], name: "index_tweets_on_tid"
     t.index ["user_id"], name: "index_tweets_on_user_id"
   end
 
