@@ -12,8 +12,8 @@
             
             <small> <%= User.find(tweet.user_id).nickname %> </small>
             <br>
-            <% if tweet.image.present? %>
-              <%= image_tag 'github.png', :size =>'160x120' %>
+            <% if tweet.image %>
+              <%= image_tag tweet.image[:original].url %>
             <% end %>
           </a>
         </li>

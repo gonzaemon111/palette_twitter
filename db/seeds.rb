@@ -9,6 +9,6 @@
 (1..3).each do |i|
   User.create!(nickname: "hogehoge#{i}", email: "hoge#{i}@hoge.com", password: "hogehoge", token: Digest::SHA256.hexdigest("hoge#{i}@hoge.com"))
   (1..3).each do |j|
-    Tweet.create!(content: "hogehoge#{j}hogehoge#{j}", user_id: i, image: open("#{Rails.root}/public/github.png"))
+    Tweet.create!(content: "hogehoge#{j}hogehoge#{j}", user_id: i)
   end
 end

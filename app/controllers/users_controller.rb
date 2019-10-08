@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :set_user, only: %i[show update]
 
   def new
     Rails.logger.debug "cookies : #{cookies.inspect}"
@@ -14,7 +15,7 @@ class UsersController < ApplicationController
     if user
       sign_in(user[:token])
       Rails.logger.debug ""
-      redirect_to "/"
+      redirect_to tweets_path
     else
       # flash.now[:danger] = t('.flash.invalid_password')
       flash.now[:danger] = "hogehoge"
@@ -31,6 +32,10 @@ class UsersController < ApplicationController
   end
 
   private
+
+  def set_user
+    @user = User.find(params[:id])
+  end
 
   def users_params
     params
