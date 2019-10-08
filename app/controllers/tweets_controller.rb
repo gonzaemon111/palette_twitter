@@ -1,5 +1,6 @@
 class TweetsController < ApplicationController
-  before_action :set_tweet, only: %i[show]
+  before_action :current_user
+  before_action :set_tweet, only: %i[show destroy edit update]
   def index
     tweets = Tweet.all.order(:updated_at)
     @tweets = TweetDecorator.decorate_collection(tweets)
@@ -24,7 +25,23 @@ class TweetsController < ApplicationController
   end
 
   def show
-    
+    @tweet = TweetDecorator.decorate(@tweet)
+  end
+
+  def edit; end
+
+  def update
+    if @tweet.update(tweet_params)
+      flash.now[:success] = "Tweet is updated"
+      redirect_to tweet_path(@tweet)
+    else
+      flash.now[:danger] = "Tweet is updated"
+    end
+  end
+
+  def destroy
+    @tweet.destroy
+    redirect_to tweets_path
   end
 
   private

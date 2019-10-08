@@ -1,5 +1,5 @@
 <div class="hoge">
-  <h2 style="padding:20px;"> <%= @current_user.nickname %>'s page </h2>
+  <h2 style="padding:20px;"> <%= @user.nickname %>'s page </h2>
   <table class="table table-striped">
     <thead>
       <tr>
@@ -11,11 +11,38 @@
     </thead>
     <tbody>
       <tr>
-        <th scope="row" class="align-middle"> <%= @current_user.nickname %> </th>
-        <td class="align-middle"> <%= @current_user.tweets.count %> </td>
-        <td class="align-middle"> <%= @current_user.tweets.last.created_at %> </td>
+        <th scope="row" class="align-middle"> <%= @user.nickname %> </th>
+        <td class="align-middle"> <%= @user.tweets.count %> </td>
+        <td class="align-middle"> <% if @user.tweets.blank? %>  None<% else %> <%= @user.tweets.last.created_at %> <% end %> </td>
         <td class="align-middle"> ここは後から </td>
       </tr>
     </tbody>
   </table>
+  <h3 style="padding:20px;"> <%= @user.nickname %>'s tweets </h3>
+  <div class="tweets_list">
+    <div class="list-group">
+      <ul>
+        <% unless @user.tweets.empty?%>
+          <% @user.tweets.each do |tweet| %>
+          <li class="list_item">
+            <a href="/tweets/<%= tweet.id%>" class="list-group-item list-group-item-action flex-column align-items-start">
+              <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1"><%= tweet.content %></h5>
+                <small><%= tweet.updated_at %></small>
+              </div>
+            
+              <br>
+              <% if tweet.image %>
+                <%= image_tag tweet.image[:original].url %>
+              <% end %>
+            </a>
+          </li>
+          <% end %>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+  <div class="button_center">
+    <a class="btn btn-outline-primary" href="/tweets" role="button">Go To Top</a>
+  </div>
 </div>

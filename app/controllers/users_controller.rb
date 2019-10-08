@@ -1,7 +1,8 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[show update]
+  # before_action :user, only: %i[show update]
 
   def signin_input
+    redirect_to root_path and return if current_user
     @user = User.new
   end
 
@@ -20,6 +21,7 @@ class UsersController < ApplicationController
   end
 
   def new
+    redirect_to root_path and return if current_user
     @user = User.new
   end
 
@@ -31,22 +33,29 @@ class UsersController < ApplicationController
     else
       # flash.now[:danger] = t('.flash.invalid_password')
       flash.now[:danger] = "hogehoge"
-      redirect_to users_sign_up_path
+      redirect_to users_signup_path
     end
   end
 
   def show
-    
+    @user = UserDecorator.decorate(user)
   end
 
   def update
     
   end
 
+  def signout
+    Rails.logger.debug "params : #{params}"
+    sign_out
+    Rails.logger.debug "cookies[:token].nil? : #{cookies[:token].nil?}"
+    redirect_to users_signin_path
+  end
+
   private
 
-  def set_user
-    @user = User.find(params[:id])
+  def user
+    User.find(params[:id])
   end
 
   def user_params
