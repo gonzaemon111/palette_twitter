@@ -12,8 +12,6 @@ class TweetsController < ApplicationController
   end
 
   def create
-    Rails.logger.debug "params: #{params}"
-    Rails.logger.debug "current_user: #{current_user}"
     tweet = Tweet.new(tweet_params)
     if tweet.save
       Rails.logger.debug "1"
@@ -26,7 +24,8 @@ class TweetsController < ApplicationController
 
   def show
     @tweet = TweetDecorator.decorate(@tweet)
-    @reply_tweets = Tweet.where(tid: @tweet.id).order(created_at: "DESC")
+    @reply_tweets = TweetDecorator.decorate_collection(Tweet.where(tid: @tweet.id).order(created_at: "DESC"))
+    @reply_tweet = Tweet.new
   end
 
   def edit; end
@@ -45,6 +44,20 @@ class TweetsController < ApplicationController
     redirect_to tweets_path
   end
 
+  def create_retweet
+    @tweet = TweetDecorator.decorate(Tweet.find(retweet_params[:tid]))
+    @reply_tweets = TweetDecorator.decorate_collection(Tweet.where(tid: @tweet.id).order(created_at: "DESC"))
+    @reply_tweet = Tweet.new(retweet_params)
+    respond_to do |format|
+      if @reply_tweet.save
+        format.html
+        format.js
+      else
+        redirect_to tweets_path
+      end
+    end
+  end
+
   private
 
   def set_tweet
@@ -57,6 +70,19 @@ class TweetsController < ApplicationController
       .permit(
         :content,
         :image
+      )
+      .merge(
+        user_id: current_user.id
+      )
+  end
+
+  def retweet_params
+    params
+      .require(:tweet)
+      .permit(
+        :content,
+        :image,
+        :tid
       )
       .merge(
         user_id: current_user.id

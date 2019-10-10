@@ -8,7 +8,7 @@ class UsersController < ApplicationController
 
   def signin
     user = User.find_by(email: user_params[:email])
-    redirect_to users_signin_path, danger: "入力されたEmailは登録されいていません" and return unless user
+    redirect_to signin_users_path, danger: "入力されたEmailは登録されいていません" and return unless user
     @user = user.authenticate(user_params[:password])
     if @user
       sign_in(@user.token)
@@ -16,7 +16,7 @@ class UsersController < ApplicationController
       redirect_to tweets_path
     else
       flash.now[:danger] = "SignInができませんでした。確認してみて下さい"
-      redirect_to users_signin_path
+      redirect_to signin_users_path
     end
   end
 
@@ -33,7 +33,7 @@ class UsersController < ApplicationController
     else
       # flash.now[:danger] = t('.flash.invalid_password')
       flash.now[:danger] = "hogehoge"
-      redirect_to users_signup_path
+      redirect_to signup_users_path
     end
   end
 
@@ -49,7 +49,7 @@ class UsersController < ApplicationController
     Rails.logger.debug "params : #{params}"
     sign_out
     Rails.logger.debug "cookies[:token].nil? : #{cookies[:token].nil?}"
-    redirect_to users_signin_path
+    redirect_to signin_users_path
   end
 
   private
