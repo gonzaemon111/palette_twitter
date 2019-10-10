@@ -1,24 +1,24 @@
 <div class="tweets_list">
   <%= form_with(model: @tweet, url: tweets_path) do |form| %>
-  <h2>New Tweet</h2>
-  <br>
-  <h4>Content</h4>
-  <div class="input-group border border-info rounded">
-    <%# <textarea placeholoder="hogehoge" class="form-control" aria-label="With textarea" ></textarea> %>
-    
-    <%= form.text_area :content, class: "form-control", "area-label": "With textarea", placeholoder: "あああ" %>
-  </div>
-  <br>
-  <h4>Image</h4>
-  <small>if you post your image</small>
-  <br><br>
-  <div class="input-group mb-3">
-    <div class="custom-file">
-      <%= form.label :image, class: "custom-file-label", for: "inputGroupFile03" %>
-      <%# form.hidden_field :image, value: tweet.cached_image_data if tweet.cached_image_data %>
-      <%= form.file_field :image, class: "custom-file-input", id: "inputGroupFile03", "aria-describedby": "inputGroupFileAddon03" %>
+    <h2>New Tweet</h2>
+    <br>
+    <h4>Content</h4>
+    <div class="input-group border border-info rounded">
+      <%# <textarea placeholoder="hogehoge" class="form-control" aria-label="With textarea" ></textarea> %>
+      
+      <%= form.text_area :content, class: "form-control", "area-label": "With textarea", placeholoder: "あああ" %>
     </div>
-  </div>
-  <%= form.submit class: "btn btn-primary" %>
+    <br>
+    <h4>Image</h4>
+    <small>if you post your image</small>
+    <br><br>
+    <div class="input-group mb-3">
+      <div class="custom-file">
+        <%= form.label :image, class: "custom-file-label", for: "inputGroupFile03" %>
+        <%# form.hidden_field :image, value: tweet.cached_image_data if tweet.cached_image_data %>
+        <%= form.file_field :image, class: "custom-file-input", id: "inputGroupFile03", "aria-describedby": "inputGroupFileAddon03" %>
+      </div>
+    </div>
+    <%= form.submit class: "btn btn-primary" %>
   <% end %>
 </div>

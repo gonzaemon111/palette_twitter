@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  before_action :current_user
+  # before_action :current_user
   def sign_in(token)
     cookies.permanent[:token] = token
     current_user

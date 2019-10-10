@@ -26,6 +26,7 @@ class TweetsController < ApplicationController
 
   def show
     @tweet = TweetDecorator.decorate(@tweet)
+    @reply_tweets = Tweet.where(tid: @tweet.id).order(created_at: "DESC")
   end
 
   def edit; end

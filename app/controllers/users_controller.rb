@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   # before_action :user, only: %i[show update]
 
   def signin_input
-    redirect_to root_path and return if current_user
+    # redirect_to root_path and return if current_user
     @user = User.new
   end
 
