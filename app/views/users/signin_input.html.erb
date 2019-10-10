@@ -1,7 +1,7 @@
 <div class="hoge">
     <div class="sign_up_form">
         <h2>Sign In</h2>
-        <%= form_with(model: @user, local: true, url: users_signin_path) do |form| %>
+        <%= form_with(model: @user, local: true, url: signin_users_path) do |form| %>
             <div class="form-group">
                 <%= form.label :email, for: "exampleInputEmail1" %>
                 <%= form.text_field :email, class: "form-control", id: "xampleInputEmail1", placeholder: "Enter Email" %>

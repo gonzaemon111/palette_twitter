@@ -29,14 +29,13 @@
       <a class="btn btn-outline-primary" href="/tweets" role="button">Go To Top</a>
     </div>
     <div class="reply_tweet" style="padding:6em;">
-      <%= form_with(model: Tweet.new, url: tweets_path) do |form| %>
+      <%= form_with(model: @reply_tweet, url: create_retweet_tweets_path) do |form| %>
         <h2>Reply Tweet</h2>
         <br>
         <h4>Content</h4>
         <div class="input-group border border-info rounded">
-          <%# <textarea placeholoder="hogehoge" class="form-control" aria-label="With textarea" ></textarea> %>
-          
-          <%= form.text_area :content, class: "form-control", "area-label": "With textarea", placeholoder: "あああ" %>
+          <%= form.hidden_field :tid, value: @tweet.id %>
+          <%= form.text_area :content, class: "form-control", placeholoder: "enter content", "area-label": "With textarea" %>
         </div>
         <br>
         <h4>Image</h4>
@@ -45,43 +44,14 @@
         <div class="input-group mb-3">
           <div class="custom-file">
             <%= form.label :image, class: "custom-file-label", for: "inputGroupFile03" %>
-            <%# form.hidden_field :image, value: tweet.cached_image_data if tweet.cached_image_data %>
             <%= form.file_field :image, class: "custom-file-input", id: "inputGroupFile03", "aria-describedby": "inputGroupFileAddon03" %>
           </div>
         </div>
         <%= form.submit class: "btn btn-primary" %>
       <% end %>
-      <div class="er", style="padding-top:3em;">
+      <div id="reply_tweets" style="padding-top:3em;">
         <ul>
-          <% unless @reply_tweets.empty?%>
-            <% @reply_tweets.each do |tweet| %>
-            <li class="list_item">
-              <%# <a href="#" class="badge badge-primary"></a> %>
-              <h5>
-                <% if tweet.user_id == @current_user.id %>
-                  <a href="/users/<%= tweet.user_id %>" class="badge badge-info" style="color:white;">
-                    <%= User.find(tweet.user_id).nickname %>
-                  </a>
-                <% else %>
-                  <a href="/users/<%= tweet.user_id %>" class="badge badge-secondary" style="color:white;">
-                    <%= User.find(tweet.user_id).nickname %>
-                  </a>
-                <% end %>
-              </h5>
-              <a href="/tweets/<%= tweet.id%>" class="list-group-item list-group-item-action flex-column align-items-start">
-                <div class="d-flex w-100 justify-content-between">
-                  <h5 class="mb-1"><%= tweet.content %></h5>
-                  <small><%= tweet.updated_at %></small>
-                </div>
-              
-                <br>
-                <% if tweet.image %>
-                  <%= image_tag tweet.image[:original].url %>
-                <% end %>
-              </a>
-            </li>
-            <% end %>
-          <% end %>
+          <%= render "reply_tweets", reply_tweets: @reply_tweets %>
         </ul>
       </div>
     </div>
