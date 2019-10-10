@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
     if @current_user
       @current_user
     else
-      redirect_to users_signin_path and return
+      redirect_to signin_users_path and return
     end
   end
 end
