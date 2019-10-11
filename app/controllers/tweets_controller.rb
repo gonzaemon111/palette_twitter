@@ -4,13 +4,12 @@ class TweetsController < ApplicationController
   def index
     tweets = Tweet.order(updated_at: :desc)
     @tweets = TweetDecorator.decorate_collection(tweets)
-    retweets = []
+    followings_ids = []
+    Rails.logger.debug "followings_ids : #{followings_ids}"
     @current_user.followings.each do |user|
-      user.tweets.order(updated_at: :desc).each do |tweet|
-        retweets.push tweet
-      end
+      followings_ids.push user.id
     end
-    @retweets = TweetDecorator.decorate_collection(retweets)
+    @retweets = TweetDecorator.decorate_collection(Tweet.where(user_id: followings_ids).order(updated_at: :desc))
   end
 
   def new
@@ -24,8 +23,8 @@ class TweetsController < ApplicationController
       flash[:success] = "ツイートの作成が成功しました"
       redirect_to tweets_path
     else
-      flash[:success] = "ツイートの作成が成功しました"
-      redirect_to tweets_path
+      flash[:danger] = "フォームを入力してください"
+      redirect_to new_tweet_path
     end
   end
 
@@ -61,9 +60,11 @@ class TweetsController < ApplicationController
     @reply_tweet = Tweet.new(retweet_params)
     respond_to do |format|
       if @reply_tweet.save
+        flash.now[:danger] = "ツイートのリプライが成功しました"
         format.html
         format.js
       else
+        flash.now[:danger] = "ツイートのリプライが失敗しました"
         redirect_to tweets_path
       end
     end
