@@ -1,0 +1,24 @@
+- unless user.id == @current_user.id
+  li.item
+    |  <a href="/users/
+    = user.id
+    | "> 
+    .card.border-info.mb-3[style="width: 100%; "]
+      .card-body.text-info
+        h5.card-title
+          = user.nickname
+        p.card-text
+          | Tweet Count : 
+          = user.tweets.count
+        p.card-text
+          | Last Tweet Time : 
+          - if @user.tweets.blank?
+            |  None
+          - else
+            = @user.tweets.last.created_at
+        p.card-text
+          | Following Count : 
+          = user.followings.count
+        p.card-text
+          | Followers Count : 
+          = user.followers.count

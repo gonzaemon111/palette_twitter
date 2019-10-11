@@ -1,0 +1,18 @@
+.hoge
+  .sign_up_form
+    h2
+      | Sign In
+    = form_with(model: @user, local: true, url: signin_users_path) do |form|
+      .form-group
+        = form.label :email, for: "exampleInputEmail1"
+        = form.text_field :email, class: "form-control", id: "xampleInputEmail1", placeholder: "Enter Email"
+        small#emailHelp.form-text.text-muted
+          | We'll never share your email with anyone else.
+      .form-group
+        = form.label :password, for: "exampleInputPassword1"
+        = form.text_field :password, type: "password", class: "form-control", id: "exampleInputPassword1", placeholder: "Enter Password"
+      = form.submit class: "btn btn-primary", value: "Sing In"
+      br
+      br
+      a.btn.btn-outline-primary[href="/users/signup" role="button"]
+        | Sign Up

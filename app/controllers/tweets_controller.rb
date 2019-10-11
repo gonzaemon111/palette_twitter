@@ -2,14 +2,14 @@ class TweetsController < ApplicationController
   before_action :current_user
   before_action :set_tweet, only: %i[show destroy edit update]
   def index
-    tweets = Tweet.order(updated_at: :desc)
+    tweets = Tweet.includes(:user).order(updated_at: :desc)
     @tweets = TweetDecorator.decorate_collection(tweets)
     followings_ids = []
     Rails.logger.debug "followings_ids : #{followings_ids}"
     @current_user.followings.each do |user|
       followings_ids.push user.id
     end
-    @retweets = TweetDecorator.decorate_collection(Tweet.where(user_id: followings_ids).order(updated_at: :desc))
+    @retweets = TweetDecorator.decorate_collection(Tweet.includes(:user).where(user_id: followings_ids).order(updated_at: :desc))
   end
 
   def new
@@ -38,7 +38,7 @@ class TweetsController < ApplicationController
 
   def update
     if @tweet.update(tweet_params)
-      flash.now[:success] = "ツイートの更新が成功しました"
+      flash[:success] = "ツイートの更新が成功しました"
       redirect_to tweet_path(@tweet)
     else
       flash.now[:danger] = "ツイートの更新が失敗しました"
@@ -47,9 +47,9 @@ class TweetsController < ApplicationController
 
   def destroy
     if @tweet.destroy
-      flash.now[:success] = "ツイートの削除が成功しました"
+      flash[:success] = "ツイートの削除が成功しました"
     else
-      flash.now[:danger] = "ツイートの削除が失敗しました"
+      flash[:danger] = "ツイートの削除が失敗しました"
     end
     redirect_to tweets_path
   end

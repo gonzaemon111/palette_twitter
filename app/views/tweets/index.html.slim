@@ -1,0 +1,12 @@
+.tweets_list
+  nav
+    #nav-tab.nav.nav-tabs[role="tablist"]
+      a#nav-home-tab.nav-item.nav-link.active[data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true"]
+        | All Tweets
+      a#nav-profile-tab.nav-item.nav-link[data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false"]
+        | Follow Tweets
+  #nav-tabContent.tab-content
+    #nav-home.tab-pane.fade.show.active[role="tabpanel" aria-labelledby="nav-home-tab"]
+      = render "tweets_list", tweets: @tweets
+    #nav-profile.tab-pane.fade[role="tabpanel" aria-labelledby="nav-profile-tab"]
+      = render "tweets_list", tweets: @retweets

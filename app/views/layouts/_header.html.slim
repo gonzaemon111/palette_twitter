@@ -1,0 +1,41 @@
+#exampleModal.modal.fade[tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"]
+  .modal-dialog[role="document"]
+    .modal-content
+      .modal-header
+        h5#exampleModalLabel.modal-title
+          | Log Out
+        button.close[type="button" data-dismiss="modal" aria-label="Close"]
+          span[aria-hidden="true"]
+            | ×
+      .modal-body
+        |  Do you really log out? 
+      .modal-footer
+        button.btn.btn-secondary[type="button" data-dismiss="modal"]
+          | Close
+        = link_to "Log Out", signout_users_path, method: :delete, role: "button", class: "btn btn-danger"
+nav.navbar.navbar-expand-lg.navbar-light.bg-info
+  a.navbar-brand[href="/" style="color:white;"]
+    | PaletteTwitter
+  button.navbar-toggler[type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation"]
+    span.navbar-toggler-icon
+  #navbarText.collapse.navbar-collapse
+    ul.navbar-nav.mr-auto
+      li.nav-item.active
+
+    span.navbar-text
+      - if @current_user
+        .btn-group
+          button.btn.btn-primary.dropdown-toggle[type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"]
+            = @current_user.nickname
+          .dropdown-menu
+            |  <a class="dropdown-item" href="/users/
+            = @current_user.id
+            | ">My Page
+            a.dropdown-item[href="/tweets/new"]
+              |  New Tweet 
+            .dropdown-divider
+            button.dropdown-item[type="button" data-toggle="modal" data-target="#exampleModal"]
+              |  Log Out 
+      - else
+        a.btn.btn-primary[role="button" style="color:white;" href="/users/signin"]
+          |  SignIn 

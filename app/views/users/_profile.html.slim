@@ -1,0 +1,29 @@
+div
+  table.table.table-striped[style="padding-top:10em;"]
+    thead
+      tr
+        th[scope="col"]
+          | Nickname
+        th[scope="col"]
+          | Tweet Count
+        th[scope="col"]
+          | Last Tweet
+        th[scope="col"]
+          | Following Count
+        th[scope="col"]
+          | Followed Count
+    tbody
+      tr
+        th.align-middle[scope="row"]
+          = user.nickname
+        td.align-middle
+          = user.tweets.count
+        td.align-middle
+          - if user.tweets.blank?
+            |  None
+          - else
+            = user.tweets.last.created_at
+        td.align-middle
+          = user.followings.count
+        td.align-middle
+          = user.followers.count
