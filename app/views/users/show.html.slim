@@ -1,0 +1,37 @@
+.hoge
+  h2[style="padding:20px;"]
+    = @user.nickname
+    | 's page 
+  = render "follow_button"
+  nav
+    #nav-tab.nav.nav-tabs[role="tablist"]
+      a#nav-profile-tab.nav-item.nav-link.active[data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="true"]
+        | All Tweets
+      a#nav-tweets-tab.nav-item.nav-link[data-toggle="tab" href="#nav-tweets" role="tab" aria-controls="nav-tweets" aria-selected="false"]
+        | Tweets
+      a#nav-friends-tab.nav-item.nav-link[data-toggle="tab" href="#nav-friends" role="tab" aria-controls="nav-friends" aria-selected="false"]
+        | Friends
+  #nav-tabContent.tab-content
+    #nav-profile.tab-pane.fade.show.active[role="tabpanel" aria-labelledby="nav-profile-tab" style="padding:2em;"]
+      = render "users/profile", user: @user
+    #nav-tweets.tab-pane.fade[role="tabpanel" aria-labelledby="nav-tweets-tab" style="padding:2em;"]
+      = render "tweets/tweets_list", tweets: @user.tweets
+    #nav-friends.tab-pane.fade[role="tabpanel" aria-labelledby="nav-friends-tab" style="padding:2em;"]
+      h3
+        = @user.nickname
+        | 's followings 
+      .button_center
+        - unless @current_user.followings.empty?
+          ul.horizontal-list
+            - @current_user.followings.each do |user|
+              = render "follow_user", user: user
+      h3
+        = @user.nickname
+        | 's followers 
+      .button_center
+        - unless @current_user.followers.empty?
+          ul.horizontal-list
+            - @current_user.followers.each do |user|
+              = render "follow_user", user: user
+  a.btn.btn-outline-primary[href="/tweets" role="button"]
+    | Go To Top
