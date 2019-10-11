@@ -27,6 +27,8 @@ gem "redis-namespace"
 gem 'image_processing'
 gem "draper"
 gem 'font-awesome-sass', '~> 5.2.0'
+gem "html2slim"
+gem 'slim-rails'
 
 group :development, :test do
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
