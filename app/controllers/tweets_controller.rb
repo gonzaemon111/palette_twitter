@@ -21,10 +21,10 @@ class TweetsController < ApplicationController
   def create
     tweet = Tweet.new(tweet_params)
     if tweet.save
-      Rails.logger.debug "1"
+      flash[:success] = "ツイートの作成が成功しました"
       redirect_to tweets_path
     else
-      Rails.logger.debug "2"
+      flash[:success] = "ツイートの作成が成功しました"
       redirect_to tweets_path
     end
   end
@@ -39,15 +39,19 @@ class TweetsController < ApplicationController
 
   def update
     if @tweet.update(tweet_params)
-      flash.now[:success] = "Tweet is updated"
+      flash.now[:success] = "ツイートの更新が成功しました"
       redirect_to tweet_path(@tweet)
     else
-      flash.now[:danger] = "Tweet is updated"
+      flash.now[:danger] = "ツイートの更新が失敗しました"
     end
   end
 
   def destroy
-    @tweet.destroy
+    if @tweet.destroy
+      flash.now[:success] = "ツイートの削除が成功しました"
+    else
+      flash.now[:danger] = "ツイートの削除が失敗しました"
+    end
     redirect_to tweets_path
   end
 
