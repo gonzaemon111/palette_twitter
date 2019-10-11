@@ -1,0 +1,22 @@
+<div>
+  <table class="table table-striped" style="padding-top:10em;">
+    <thead>
+      <tr>
+        <th scope="col">Nickname</th>
+        <th scope="col">Tweet Count</th>
+        <th scope="col">Last Tweet</th>
+        <th scope="col">Following Count</th>
+        <th scope="col">Followed Count</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row" class="align-middle"> <%= user.nickname %> </th>
+        <td class="align-middle"> <%= user.tweets.count %> </td>
+        <td class="align-middle"> <% if user.tweets.blank? %>  None<% else %> <%= user.tweets.last.created_at %> <% end %> </td>
+        <td class="align-middle"> <%= user.followings.count %> </td>
+        <td class="align-middle"> <%= user.followers.count %> </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
