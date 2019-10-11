@@ -15,4 +15,5 @@ Rails.application.routes.draw do
       post "create_retweet"
     end
   end
+  resources :relationships, only: %i[create destroy]
 end

@@ -2,8 +2,15 @@ class TweetsController < ApplicationController
   before_action :current_user
   before_action :set_tweet, only: %i[show destroy edit update]
   def index
-    tweets = Tweet.all.order(:updated_at)
+    tweets = Tweet.order(updated_at: :desc)
     @tweets = TweetDecorator.decorate_collection(tweets)
+    retweets = []
+    @current_user.followings.each do |user|
+      user.tweets.order(updated_at: :desc).each do |tweet|
+        retweets.push tweet
+      end
+    end
+    @retweets = TweetDecorator.decorate_collection(retweets)
   end
 
   def new

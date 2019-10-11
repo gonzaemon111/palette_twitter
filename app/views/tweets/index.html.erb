@@ -1,35 +1,16 @@
 <div class="tweets_list">
-  <div class="list-group">
-    <ul>
-      <% unless @tweets.empty?%>
-        <% @tweets.each do |tweet| %>
-        <li class="list_item">
-          <%# <a href="#" class="badge badge-primary"></a> %>
-          <h5>
-            <% if tweet.user_id == @current_user.id %>
-              <a href="/users/<%= tweet.user_id %>" class="badge badge-info" style="color:white;">
-                <%= User.find(tweet.user_id).nickname %>
-              </a>
-            <% else %>
-              <a href="/users/<%= tweet.user_id %>" class="badge badge-secondary" style="color:white;">
-                <%= User.find(tweet.user_id).nickname %>
-              </a>
-            <% end %>
-          </h5>
-          <a href="/tweets/<%= tweet.id%>" class="list-group-item list-group-item-action flex-column align-items-start">
-            <div class="d-flex w-100 justify-content-between">
-              <h5 class="mb-1"><%= tweet.content %></h5>
-              <small><%= tweet.updated_at %></small>
-            </div>
-          
-            <br>
-            <% if tweet.image %>
-              <%= image_tag tweet.image[:original].url %>
-            <% end %>
-          </a>
-        </li>
-        <% end %>
-      <% end %>
-    </ul>
+  <nav>
+    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+      <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">All Tweets</a>
+      <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Follow Tweets</a>
+    </div>
+  </nav>
+  <div class="tab-content" id="nav-tabContent">
+    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+      <%= render "tweets_list", tweets: @tweets %>
+    </div>
+    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+      <%= render "tweets_list", tweets: @retweets %>
+    </div>
   </div>
 </div>

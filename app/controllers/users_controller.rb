@@ -12,16 +12,16 @@ class UsersController < ApplicationController
     @user = user.authenticate(user_params[:password])
     if @user
       sign_in(@user.token)
-      flash.now[:success] = "ログインに成功しました"
+      flash[:success] = "ログインに成功しました"
       redirect_to tweets_path
     else
-      flash.now[:danger] = "SignInができませんでした。確認してみて下さい"
+      flash[:danger] = "SignInができませんでした。確認してみて下さい"
       redirect_to signin_users_path
     end
   end
 
   def new
-    redirect_to root_path and return if current_user
+    # redirect_to root_path and return if current_user
     @user = User.new
   end
 
@@ -29,15 +29,16 @@ class UsersController < ApplicationController
     user = ::Users::NewUsecase.new(user_params).execute
     if user
       sign_in(user[:token])
+      flash[:success] = "ユーザ登録に成功しました"
       redirect_to tweets_path
     else
-      # flash.now[:danger] = t('.flash.invalid_password')
-      flash.now[:danger] = "hogehoge"
+      flash[:danger] = "フォームを全て入力してください！"
       redirect_to signup_users_path
     end
   end
 
   def show
+    current_user
     @user = UserDecorator.decorate(user)
   end
 
@@ -48,7 +49,7 @@ class UsersController < ApplicationController
   def signout
     Rails.logger.debug "params : #{params}"
     sign_out
-    Rails.logger.debug "cookies[:token].nil? : #{cookies[:token].nil?}"
+    flash[:success] = "ログアウトしました"
     redirect_to signin_users_path
   end
 

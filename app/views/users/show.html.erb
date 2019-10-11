@@ -1,5 +1,6 @@
 <div class="hoge">
   <h2 style="padding:20px;"> <%= @user.nickname %>'s page </h2>
+  <%= render "follow_button" %>
   <table class="table table-striped">
     <thead>
       <tr>
@@ -14,7 +15,7 @@
         <th scope="row" class="align-middle"> <%= @user.nickname %> </th>
         <td class="align-middle"> <%= @user.tweets.count %> </td>
         <td class="align-middle"> <% if @user.tweets.blank? %>  None<% else %> <%= @user.tweets.last.created_at %> <% end %> </td>
-        <td class="align-middle"> ここは後から </td>
+        <td class="align-middle"> <%= @user.followings.count %> </td>
       </tr>
     </tbody>
   </table>
@@ -46,3 +47,5 @@
     <a class="btn btn-outline-primary" href="/tweets" role="button">Go To Top</a>
   </div>
 </div>
+
+<%= render "follow_button" %>
