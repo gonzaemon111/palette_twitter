@@ -26,7 +26,6 @@ class User < ApplicationRecord
   end
 
   def self_relationship_create
-    Rails.logger.debug "--------------\n\n"
     Relationship.create!(user_id: self.id, follow_id: self.id)
   end
 end

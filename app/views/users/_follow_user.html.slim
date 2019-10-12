@@ -8,17 +8,22 @@
         h5.card-title
           = user.nickname
         p.card-text
-          | Tweet Count : 
+          = I18n.t("views.user_pages.profile.tweet_count")
+          | : 
           = user.tweets.count
         p.card-text
-          | Last Tweet Time : 
+          = I18n.t("views.user_pages.profile.last_tweet")
+          | : 
           - if @user.tweets.blank?
-            |  None
+            |
+            = I18n.t("views.user_pages.profile.tweet_none")
           - else
             = @user.tweets.last.created_at
         p.card-text
-          | Following Count : 
+          = I18n.t("views.user_pages.profile.followings")
+          | : 
           = user.followings.count
         p.card-text
-          | Followers Count : 
+          = I18n.t("views.user_pages.profile.followers")
+          | : 
           = user.followers.count

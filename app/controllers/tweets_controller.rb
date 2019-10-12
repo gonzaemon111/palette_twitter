@@ -5,11 +5,11 @@ class TweetsController < ApplicationController
     tweets = Tweet.includes(:user).order(updated_at: :desc)
     @tweets = TweetDecorator.decorate_collection(tweets)
     followings_ids = []
-    Rails.logger.debug "followings_ids : #{followings_ids}"
     @current_user.followings.each do |user|
       followings_ids.push user.id
     end
-    @retweets = TweetDecorator.decorate_collection(Tweet.includes(:user).where(user_id: followings_ids).order(updated_at: :desc))
+    rewteets = Tweet.includes(:user).where(user_id: followings_ids).order(updated_at: :desc)
+    @retweets = TweetDecorator.decorate_collection(rewteets)
   end
 
   def new
@@ -20,10 +20,10 @@ class TweetsController < ApplicationController
   def create
     tweet = Tweet.new(tweet_params)
     if tweet.save
-      flash[:success] = "ツイートの作成が成功しました"
+      flash[:success] = I18n.t("requests.flash.tweets.create.success")
       redirect_to tweets_path
     else
-      flash[:danger] = "フォームを入力してください"
+      flash[:danger] = I18n.t("requests.flash.tweets.create.failure")
       redirect_to new_tweet_path
     end
   end
@@ -38,20 +38,21 @@ class TweetsController < ApplicationController
 
   def update
     if @tweet.update(tweet_params)
-      flash[:success] = "ツイートの更新が成功しました"
+      flash[:success] = I18n.t("requests.flash.tweets.update.success")
       redirect_to tweet_path(@tweet)
     else
-      flash.now[:danger] = "ツイートの更新が失敗しました"
+      flash.now[:danger] = I18n.t("requests.flash.tweets.update.failure")
     end
   end
 
   def destroy
     if @tweet.destroy
-      flash[:success] = "ツイートの削除が成功しました"
+      flash[:success] = I18n.t("requests.flash.tweets.destroy.success")
+      redirect_to tweets_path
     else
-      flash[:danger] = "ツイートの削除が失敗しました"
+      flash[:danger] = I18n.t("requests.flash.tweets.destroy.failure")
+      redirect_to tweet_path(@tweet)
     end
-    redirect_to tweets_path
   end
 
   def create_retweet
@@ -60,11 +61,11 @@ class TweetsController < ApplicationController
     @reply_tweet = Tweet.new(retweet_params)
     respond_to do |format|
       if @reply_tweet.save
-        flash.now[:danger] = "ツイートのリプライが成功しました"
+        flash.now[:success] = I18n.t("requests.flash.tweets.create_retweet.success")
         format.html
         format.js
       else
-        flash.now[:danger] = "ツイートのリプライが失敗しました"
+        flash.now[:danger] = I18n.t("requests.flash.tweets.create_retweet.failure")
         redirect_to tweets_path
       end
     end

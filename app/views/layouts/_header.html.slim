@@ -3,16 +3,19 @@
     .modal-content
       .modal-header
         h5#exampleModalLabel.modal-title
-          | Log Out
+          |
+          = I18n.t("views.modal.logout.title")
         button.close[type="button" data-dismiss="modal" aria-label="Close"]
           span[aria-hidden="true"]
             | ×
       .modal-body
-        |  Do you really log out? 
+        |
+        = I18n.t("views.modal.logout.body")
       .modal-footer
         button.btn.btn-secondary[type="button" data-dismiss="modal"]
-          | Close
-        = link_to "Log Out", signout_users_path, method: :delete, role: "button", class: "btn btn-danger"
+          |
+          = I18n.t("views.modal.logout.close_btn")
+        = link_to I18n.t("views.modal.logout.logout_btn"), signout_users_path, method: :delete, role: "button", class: "btn btn-danger"
 nav.navbar.navbar-expand-lg.navbar-light.bg-info
   a.navbar-brand[href="/" style="color:white;"]
     | PaletteTwitter
@@ -30,12 +33,15 @@ nav.navbar.navbar-expand-lg.navbar-light.bg-info
           .dropdown-menu
             |  <a class="dropdown-item" href="/users/
             = @current_user.id
-            | ">My Page
+            | ">
+            = I18n.t("views.header_nav.my_page_btn")
             a.dropdown-item[href="/tweets/new"]
-              |  New Tweet 
+              |
+              = I18n.t("views.header_nav.tweet_new_btn")
             .dropdown-divider
             button.dropdown-item[type="button" data-toggle="modal" data-target="#exampleModal"]
-              |  Log Out 
+              |
+              = I18n.t("views.header_nav.logout_btn")
       - else
         a.btn.btn-primary[role="button" style="color:white;" href="/users/signin"]
           |  SignIn 

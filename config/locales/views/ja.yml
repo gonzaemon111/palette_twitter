@@ -1,0 +1,71 @@
+ja:
+  views:
+    header_nav:
+      my_page_btn: マイページ
+      tweet_new_btn: ツイート作成
+      logout_btn: ログアウト
+    modal:
+      logout:
+        title: ログアウト
+        body: 本当にログアウトしますか？
+        close_btn: 閉じる
+        logout_btn: ログアウト
+      tweet:
+        delete:
+          title: ツイート削除
+          body: 本当にツイートを削除しますか？
+          close_btn: 閉じる
+          delete_btn: 削除
+    btn:
+      go_to_top: ホームに戻る
+      follow: フォロー
+      unfollow: フォロー解除
+      tweet:
+        create: ツイート
+        delete: 削除する
+        update: 変更する
+      sign_up: サインアップ
+      sign_in: サインイン
+    tweets_list:
+      all_tweets: 全てのツイート
+      follow_tweets: フォローしているユーザのツイート
+    tweet_new:
+      title: 新規作成
+    tweet_edit:
+      title: ツイート更新
+    tweet_show:
+      reply_tweet: 返信
+      content: 内容
+      image: 画像
+      image_small_message: もし画像を添付したい場合は、ファイルを選択
+    user_pages:
+      page: "%{nickname}のページ"
+      nav_bar:
+        profile: プロフィール
+        tweets: ツイート
+        friends: 友達
+      profile:
+        nickname: ニックネーム
+        tweet_count: ツイート回数
+        last_tweet: 最新ツイート日時
+        followings: フォロー
+        followers: フォロワー
+        tweet_none: なし
+      friends:
+        followings: "%{nickname}さんのフォロー"
+        followers: "%{nickname}さんのフォロワー"
+    placeholoder: "%{value}を入力してください"
+    sign_in:
+      title: サインイン
+      email: Eメール
+      email_small_message: メールを他人と共有することはありません。
+      password: パスワード
+    sign_up:
+      title: サインアップ
+      email: Eメール
+      email_small_message: メールを他人と共有することはありません。
+      password: パスワード
+      password_confirmation: パスワードの再入力
+      password_confirmation_placeholoder: パスワードの再入力をしてください
+      nickname: ニックネーム
+        

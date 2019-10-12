@@ -3,16 +3,12 @@ class RelationshipsController < ApplicationController
 
   def create
     @user = User.find(params[:follow_id])
-    Rails.logger.debug "@current_user : #{@current_user}"
-    Rails.logger.debug "@current_user.class : #{@current_user.class}"
-    Rails.logger.debug "current_user : #{current_user}"
-    Rails.logger.debug "current_user.class : #{current_user.class}"
-    following = @current_user.follow(@user)
+    following = current_user.follow(@user)
     if following.save
-      flash[:success] = 'ユーザーをフォローしました'
+      flash[:success] = I18n.t("requests.flash.relationships.create.success")
       redirect_to @user
     else
-      flash.now[:alert] = 'ユーザーのフォローに失敗しました'
+      flash.now[:alert] = I18n.t("requests.flash.relationships.create.failure")
       redirect_to @user
     end
   end
@@ -21,10 +17,10 @@ class RelationshipsController < ApplicationController
     user = User.find(params[:follow_id])
     following = current_user.unfollow(user)
     if following.destroy
-      flash[:success] = 'ユーザーのフォローを解除しました'
+      flash[:success] = I18n.t("requests.flash.relationships.destroy.success")
       redirect_to user
     else
-      flash.now[:alert] = 'ユーザーのフォロー解除に失敗しました'
+      flash.now[:alert] = I18n.t("requests.flash.relationships.destroy.failure")
       redirect_to user
     end
   end

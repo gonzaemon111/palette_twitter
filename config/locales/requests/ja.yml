@@ -1,0 +1,35 @@
+ja:
+  requests:
+    flash:
+      tweets:
+        create:
+          success: ツイートの作成が成功しました
+          failure: ツイートの作成が失敗しました
+        destroy:
+          success: ツイートの削除が成功しました
+          failure: ツイートの削除が失敗しました
+        update:
+          success: ツイートの更新が成功しました
+          failure: ツイートの更新が失敗しました
+        create_retweet:
+          success: ツイートのリプライが成功しました
+          failure: ツイートのリプライが失敗しました
+      users:
+        sign_in:
+          not_found_user: 入力されたEmailは登録されいていません
+          success: ログインに成功しました
+          failure: サインインができませんでした。確認してみて下さい
+        sign_up:
+          success: ユーザ登録に成功しました
+          failure: フォームを全て入力してください！
+        logout:
+          success: ログアウトしました
+      relationships:
+        create:
+          success: ユーザーをフォローしました
+          failure: ユーザーのフォローに失敗しました
+          tid: ツイートID
+        destroy:
+          success: ユーザーをフォロー解除しました
+          failure: ユーザーのフォロー解除に失敗しました
+      

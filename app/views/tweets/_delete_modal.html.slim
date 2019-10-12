@@ -3,13 +3,16 @@
     .modal-content
       .modal-header
         h5#exampleModalLabel.modal-title
-          | Delete Tweet
+          |
+          = I18n.t("views.modal.tweet.delete.title")
         button.close[type="button" data-dismiss="modal" aria-label="Close"]
           span[aria-hidden="true"]
             | ×
       .modal-body
-        |  Do you really delete this tweet? 
+        |
+        = I18n.t("views.modal.tweet.delete.body")
       .modal-footer
         button.btn.btn-secondary[type="button" data-dismiss="modal"]
-          | Close
-        = link_to "Delete", tweet_path(tweet), method: :delete, role: "button", class: "btn btn-danger"
+          |
+          = I18n.t("views.modal.tweet.delete.close_btn")
+        = link_to I18n.t("views.modal.tweet.delete.delete_btn"), tweet_path(tweet), method: :delete, role: "button", class: "btn btn-danger"

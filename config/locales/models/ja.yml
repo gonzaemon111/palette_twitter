@@ -1,0 +1,14 @@
+ja:
+  models:
+    user:
+      nickname: ニックネーム
+      email: Eメール
+      password: パスワード
+      token: トークン
+    tweet:
+      user_id: ユーザID
+      content: 内容
+      image_data: 画像
+    relationships:
+      user_id: フォローID
+      follow_id: フォロワーID

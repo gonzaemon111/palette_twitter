@@ -3,8 +3,8 @@
     - if @current_user.following?(@user)
       = form_for(@current_user.relationships.find_by(follow_id: @user.id), html: { method: :delete }) do |f|
         = hidden_field_tag :follow_id, @user.id
-        = f.submit 'Unfollow', class: 'btn btn-danger'
+        = f.submit I18n.t("views.btn.unfollow"), class: 'btn btn-danger'
     - else
       = form_for(@current_user.relationships.build) do |f|
         = hidden_field_tag :follow_id, @user.id
-        = f.submit 'Follow', class: 'btn btn-primary'
+        = f.submit I18n.t("views.btn.follow"), class: 'btn btn-primary'
