@@ -22,8 +22,6 @@ gem "bootstrap", "~> 4.1.1"
 gem "jquery-rails"
 gem "shrine"
 gem "docker-sync", "0.5.9"
-gem "sidekiq"
-gem "redis-namespace"
 gem 'image_processing'
 gem "draper"
 gem 'font-awesome-sass', '~> 5.2.0'
