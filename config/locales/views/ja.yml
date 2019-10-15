@@ -54,7 +54,7 @@ ja:
       friends:
         followings: "%{nickname}さんのフォロー"
         followers: "%{nickname}さんのフォロワー"
-    placeholoder: "%{value}を入力してください"
+    placeholder: "%{value}を入力してください"
     sign_in:
       title: サインイン
       email: Eメール
@@ -66,6 +66,6 @@ ja:
       email_small_message: メールを他人と共有することはありません。
       password: パスワード
       password_confirmation: パスワードの再入力
-      password_confirmation_placeholoder: パスワードの再入力をしてください
+      password_confirmation_placeholder: パスワードの再入力をしてください
       nickname: ニックネーム
         

@@ -1,15 +1,14 @@
 class RelationshipsController < ApplicationController
-  before_action :set_user
-
   def create
-    @user = User.find(params[:follow_id])
-    following = current_user.follow(@user)
+    user = User.find(params[:follow_id])
+    following = current_user.follow(user)
     if following.save
       flash[:success] = I18n.t("requests.flash.relationships.create.success")
-      redirect_to @user
+      @user =  UserDecorator.decorate(user)
+      redirect_to user_path(@user)
     else
-      flash.now[:alert] = I18n.t("requests.flash.relationships.create.failure")
-      redirect_to @user
+      flash[:alert] = I18n.t("requests.flash.relationships.create.failure")
+      redirect_to user
     end
   end
 
@@ -18,16 +17,11 @@ class RelationshipsController < ApplicationController
     following = current_user.unfollow(user)
     if following.destroy
       flash[:success] = I18n.t("requests.flash.relationships.destroy.success")
-      redirect_to user
+      @user =  UserDecorator.decorate(user)
+      redirect_to user_path(@user)
     else
-      flash.now[:alert] = I18n.t("requests.flash.relationships.destroy.failure")
+      flash[:alert] = I18n.t("requests.flash.relationships.destroy.failure")
       redirect_to user
     end
-  end
-
-  private
-
-  def set_user
-    user = User.find(params[:follow_id])
   end
 end

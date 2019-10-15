@@ -8,5 +8,6 @@ class CreateTweets < ActiveRecord::Migration[5.2]
 
       t.timestamps
     end
+    # add_reference :tweets, :tweet, foreign_key: true, null: false, index: true, comment: "リツイート ID"
   end
 end

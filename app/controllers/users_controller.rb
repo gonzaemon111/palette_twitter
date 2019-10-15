@@ -23,7 +23,7 @@ class UsersController < ApplicationController
   end
 
   def signup
-    user = ::Users::NewUsecase.new(user_params).execute
+    user = ::Users::SignupUsecase.new(user_params).execute
     if user
       sign_in(user[:token])
       flash[:success] = I18n.t("requests.flash.users.sign_up.success")

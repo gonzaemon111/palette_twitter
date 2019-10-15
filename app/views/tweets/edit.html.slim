@@ -1,5 +1,5 @@
 .tweets_list
-  = form_with(model: @tweet, url: tweet_path, method: :put) do |form|
+  = form_with(model: tweet, url: tweet_path, method: :put) do |form|
     h2
       |
       = I18n.t("views.tweet_edit.title")
@@ -8,8 +8,7 @@
       |
       = I18n.t("views.tweet_show.content")
     .input-group.border.border-info.rounded
-      - # <textarea placeholoder="hogehoge" class="form-control" aria-label="With textarea" ></textarea>
-      = form.text_area :content, class: "form-control", "area-label": "With textarea", placeholoder: "あああ"
+      = form.text_area :content, class: "form-control", "area-label": "With textarea", placeholder: I18n.t("views.placeholder", value: I18n.t("models.tweet.content"))
     br
     h4
       |
@@ -22,6 +21,5 @@
     .input-group.mb-3
       .custom-file
         = form.label :image, class: "custom-file-label", for: "inputGroupFile03"
-        - # form.hidden_field :image, value: tweet.cached_image_data if tweet.cached_image_data
         = form.file_field :image, class: "custom-file-input", id: "inputGroupFile03", "aria-describedby": "inputGroupFileAddon03"
     = form.submit I18n.t("views.btn.tweet.update"), class: "btn btn-primary"

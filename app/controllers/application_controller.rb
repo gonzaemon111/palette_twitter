@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
       @current_user
     else
       flash[:danger] = I18n.t("requests.flash.users.sign_in.failure")
-      redirect_to signin_users_path and return
+      not_found_current_user
     end
   end
 
@@ -28,5 +28,10 @@ class ApplicationController < ActionController::Base
   # リンクの多言語化に対応する
   def set_locale
     I18n.locale = params[:locale] || I18n.default_locale
+  end
+
+  private
+  def not_found_current_user
+    redirect_to signin_users_path and return
   end
 end

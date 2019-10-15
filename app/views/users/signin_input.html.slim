@@ -1,4 +1,4 @@
-.hoge
+.user_sign
   .sign_up_form
     h2
       |
@@ -6,13 +6,13 @@
     = form_with(model: @user, local: true, url: signin_users_path) do |form|
       .form-group
         = form.label :email, for: "exampleInputEmail1", value: I18n.t("views.sign_in.email")
-        = form.text_field :email, class: "form-control", id: "xampleInputEmail1", placeholder: I18n.t("views.placeholoder", value: I18n.t("views.sign_in.email"))
+        = form.text_field :email, class: "form-control", id: "xampleInputEmail1", placeholder: I18n.t("views.placeholder", value: I18n.t("views.sign_in.email"))
         small#emailHelp.form-text.text-muted
           |
           = I18n.t("views.sign_in.email_small_message")
       .form-group
         = form.label :password, for: "exampleInputPassword1", value: I18n.t("views.sign_in.password")
-        = form.text_field :password, type: "password", class: "form-control", id: "exampleInputPassword1", placeholder: I18n.t("views.placeholoder", value: I18n.t("views.sign_in.password"))
+        = form.text_field :password, type: "password", class: "form-control", id: "exampleInputPassword1", placeholder: I18n.t("views.placeholder", value: I18n.t("views.sign_in.password"))
       = form.submit class: "btn btn-primary", value: I18n.t("views.sign_in.title")
       br
       br

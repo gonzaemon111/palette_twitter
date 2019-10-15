@@ -29,13 +29,13 @@
       <a class="btn btn-outline-primary" href="/tweets" role="button"><%= I18n.t("views.btn.go_to_top") %></a>
     </div>
     <div class="reply_tweet" style="padding:6em;">
-      <%= form_with(model: @reply_tweet, url: create_retweet_tweets_path) do |form| %>
+      <%= form_with(model: @reply_tweet, url: create_reply_tweet_tweets_path) do |form| %>
         <h2><%= I18n.t("views.tweet_show.reply_tweet") %></h2>
         <br>
         <h4><%= I18n.t("views.tweet_show.content") %></h4>
         <div class="input-group border border-info rounded">
           <%= form.hidden_field :tid, value: @tweet.id %>
-          <%= form.text_area :content, class: "form-control", placeholoder: "enter content", "area-label": "With textarea" %>
+          <%= form.text_area :content, class: "form-control", placeholder: I18n.t("views.placeholder", value: I18n.t("models.tweet.content")), "area-label": "With textarea" %>
         </div>
         <br>
         <h4><%= I18n.t("views.tweet_show.image") %></h4>

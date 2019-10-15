@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   end
   resources :tweets do
     collection do
-      post "create_retweet"
+      post "create_reply_tweet"
     end
   end
   resources :relationships, only: %i[create destroy]
