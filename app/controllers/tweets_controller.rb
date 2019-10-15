@@ -8,8 +8,8 @@ class TweetsController < ApplicationController
     @current_user.followings.each do |user|
       followings_ids.push user.id
     end
-    rewteets = Tweet.includes(:user).where(user_id: followings_ids).order(updated_at: :desc)
-    @retweets = TweetDecorator.decorate_collection(rewteets)
+    retweets = Tweet.includes(:user).where(user_id: followings_ids).order(updated_at: :desc)
+    @retweets = TweetDecorator.decorate_collection(retweets)
   end
 
   def new
@@ -30,7 +30,7 @@ class TweetsController < ApplicationController
 
   def show
     @tweet = TweetDecorator.decorate(tweet)
-    @reply_tweets = TweetDecorator.decorate_collection(Tweet.where(tid: @tweet.id).order(created_at: "DESC"))
+    @reply_tweets = TweetDecorator.decorate_collection(Tweet.where(tweet_id: @tweet.id).order(created_at: "DESC"))
     @reply_tweet = Tweet.new
   end
 
@@ -57,8 +57,8 @@ class TweetsController < ApplicationController
   end
 
   def create_reply_tweet
-    @tweet = TweetDecorator.decorate(Tweet.find(reply_tweet_params[:tid]))
-    @reply_tweets = TweetDecorator.decorate_collection(Tweet.where(tid: @tweet.id).order(created_at: "DESC"))
+    @tweet = TweetDecorator.decorate(Tweet.find(reply_tweet_params[:tweet_id]))
+    @reply_tweets = TweetDecorator.decorate_collection(Tweet.where(tweet_id: @tweet.id).order(created_at: "DESC"))
     @reply_tweet = Tweet.new(reply_tweet_params)
     respond_to do |format|
       if @reply_tweet.save
@@ -97,7 +97,7 @@ class TweetsController < ApplicationController
       .permit(
         :content,
         :image,
-        :tid
+        :tweet_id
       )
       .merge(
         user_id: current_user.id

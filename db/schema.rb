@@ -26,11 +26,11 @@ ActiveRecord::Schema.define(version: 2019_10_10_173107) do
     t.bigint "user_id", null: false, comment: "ユーザーID"
     t.string "content", default: "", null: false, comment: "内容"
     t.text "image_data", comment: "画像"
-    t.integer "tid", default: 0, null: false, comment: "リツイート ID"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "tweet_id", comment: "リツイート ID"
     t.index ["content"], name: "index_tweets_on_content"
-    t.index ["tid"], name: "index_tweets_on_tid"
+    t.index ["tweet_id"], name: "index_tweets_on_tweet_id"
     t.index ["user_id"], name: "index_tweets_on_user_id"
   end
 
@@ -47,5 +47,6 @@ ActiveRecord::Schema.define(version: 2019_10_10_173107) do
 
   add_foreign_key "relationships", "users"
   add_foreign_key "relationships", "users", column: "follow_id"
+  add_foreign_key "tweets", "tweets"
   add_foreign_key "tweets", "users"
 end

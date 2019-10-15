@@ -1,3 +1,3 @@
 class UserDecorator < ApplicationDecorator
-  delegate
+  delegate_all
 end

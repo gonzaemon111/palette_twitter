@@ -1,3 +1,3 @@
 class TweetDecorator < ApplicationDecorator
-  delegate
+  delegate_all
 end
