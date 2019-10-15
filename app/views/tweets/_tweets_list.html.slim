@@ -6,10 +6,10 @@
           h5
             - if tweet.user_id == @current_user.id
               a href="/users/#{tweet.user_id}" class="badge badge-info" style="color:white;"
-                = User.find(tweet.user_id).nickname
+                = tweet.user_nickname
             - else
               a href="/users/#{tweet.user_id}" class="badge badge-secondary" style="color:white;"
-                = User.find(tweet.user_id).nickname
+                = tweet.user_nickname
           a href="/tweets/#{tweet.id}" class="list-group-item list-group-item-action flex-column align-items-start"
             .d-flex.w-100.justify-content-between
               h5.mb-1
