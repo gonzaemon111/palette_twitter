@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :ensure_signed_in, except: %i[signin_input signin new signup]
 
   def signin_input
     @user = User.new
@@ -7,6 +8,7 @@ class UsersController < ApplicationController
   def signin
     user = User.find_by(email: user_params[:email])
     redirect_to signin_users_path, danger: I18n.t("flash.users.sign_in.not_found_user") and return unless user
+    Rails.logger.debug "user : #{user.inspect}"
     @user = user.authenticate(user_params[:password])
     if @user
       sign_in(@user.token)

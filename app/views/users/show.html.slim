@@ -18,7 +18,7 @@
     #nav-profile.tab-pane.fade.show.active[role="tabpanel" aria-labelledby="nav-profile-tab" style="padding:2em;"]
       = render "users/profile", user: @user
     #nav-tweets.tab-pane.fade[role="tabpanel" aria-labelledby="nav-tweets-tab" style="padding:2em;"]
-      = render "tweets/tweets_list", tweets: @user.tweets
+      = render "tweets/tweets_list", tweets: TweetDecorator.decorate_collection(@user.tweets)
     #nav-friends.tab-pane.fade[role="tabpanel" aria-labelledby="nav-friends-tab" style="padding:2em;"]
       h3
         = I18n.t("views.user_pages.friends.followings", nickname: @user.nickname)

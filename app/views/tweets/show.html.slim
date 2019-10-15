@@ -11,7 +11,7 @@
               = @tweet.updated_at
           
           small
-            = User.find(@tweet.user_id).nickname
+            = @tweet.user_nickname
           br
           - if @tweet.image
             = image_tag @tweet.image[:original].url
