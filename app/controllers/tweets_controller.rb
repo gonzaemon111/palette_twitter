@@ -1,6 +1,4 @@
 class TweetsController < ApplicationController
-  before_action :current_user
-
   def index
     tweets = Tweet.includes(:user).order(updated_at: :desc)
     @tweets = TweetDecorator.decorate_collection(tweets)
