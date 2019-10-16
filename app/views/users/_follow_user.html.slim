@@ -1,8 +1,6 @@
 - unless user.id == @current_user.id
   li.item
-    |  <a href="/users/
-    = user.id
-    | "> 
+    a href="/users/#{user.id}" 
     .card.border-info.mb-3[style="width: 100%; "]
       .card-body.text-info
         h5.card-title
@@ -15,7 +13,6 @@
           = I18n.t("views.user_pages.profile.last_tweet")
           | : 
           - if @user.tweets.blank?
-            |
             = I18n.t("views.user_pages.profile.tweet_none")
           - else
             = @user.tweets.last.created_at

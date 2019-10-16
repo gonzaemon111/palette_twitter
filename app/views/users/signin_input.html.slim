@@ -1,14 +1,12 @@
 .user_sign
-  .sign_up_form
+  .sign_in_and_up_form
     h2
-      |
       = I18n.t("views.sign_in.title")
     = form_with(model: @user, local: true, url: signin_users_path) do |form|
       .form-group
         = form.label :email, for: "exampleInputEmail1", value: I18n.t("views.sign_in.email")
         = form.text_field :email, class: "form-control", id: "xampleInputEmail1", placeholder: I18n.t("views.placeholder", value: I18n.t("views.sign_in.email"))
         small#emailHelp.form-text.text-muted
-          |
           = I18n.t("views.sign_in.email_small_message")
       .form-group
         = form.label :password, for: "exampleInputPassword1", value: I18n.t("views.sign_in.password")
@@ -17,5 +15,4 @@
       br
       br
       a.btn.btn-outline-primary[href="/users/signup" role="button"]
-        |
         = I18n.t("views.btn.sign_up")

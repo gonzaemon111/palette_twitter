@@ -11,7 +11,7 @@ ja:
         update:
           success: ツイートの更新が成功しました
           failure: ツイートの更新が失敗しました
-        create_retweet:
+        create_reply_tweet:
           success: ツイートのリプライが成功しました
           failure: ツイートのリプライが失敗しました
       users:

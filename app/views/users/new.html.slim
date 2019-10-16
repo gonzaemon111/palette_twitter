@@ -1,7 +1,6 @@
 .user_sign
-  .sign_up_form
+  .sign_in_and_up_form
     h2
-      |
       = I18n.t("views.sign_up.title")
     = form_with(model: @user, local: true, url: signup_users_path) do |form|
       .form-group
@@ -22,5 +21,4 @@
       br
       br
       a.btn.btn-outline-primary[href="/users/signin" role="button"]
-        |
         = I18n.t("views.btn.sign_in")

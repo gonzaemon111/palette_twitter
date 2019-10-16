@@ -1,5 +1,5 @@
 module Users
-  class NewUsecase
+  class SignupUsecase
     def initialize(params)
       @params = params
       @user = User.new(@params)
@@ -9,8 +9,6 @@ module Users
       return false unless password_validation
       @user[:token] = create_token(@params[:email])
       return false unless @user.save
-      # sign_in(@user[:token])
-      # cookieに保存
       @user
     end
 

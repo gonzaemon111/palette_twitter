@@ -1,20 +1,16 @@
 .tweets_list
   = form_with(model: tweet, url: tweet_path, method: :put) do |form|
     h2
-      |
       = I18n.t("views.tweet_edit.title")
     br
     h4
-      |
       = I18n.t("views.tweet_show.content")
     .input-group.border.border-info.rounded
       = form.text_area :content, class: "form-control", "area-label": "With textarea", placeholder: I18n.t("views.placeholder", value: I18n.t("models.tweet.content"))
     br
     h4
-      |
       = I18n.t("views.tweet_show.image")
     small
-      |
       = I18n.t("views.tweet_show.image_small_message")
     br
     br

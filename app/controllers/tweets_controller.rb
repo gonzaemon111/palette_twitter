@@ -6,8 +6,8 @@ class TweetsController < ApplicationController
     @current_user.followings.each do |user|
       followings_ids.push user.id
     end
-    retweets = Tweet.includes(:user).where(user_id: followings_ids).order(updated_at: :desc)
-    @retweets = TweetDecorator.decorate_collection(retweets)
+    reply_tweets = Tweet.includes(:user).where(user_id: followings_ids).order(updated_at: :desc)
+    @reply_tweets = TweetDecorator.decorate_collection(@reply_tweets)
   end
 
   def new
@@ -60,11 +60,11 @@ class TweetsController < ApplicationController
     @reply_tweet = Tweet.new(reply_tweet_params)
     respond_to do |format|
       if @reply_tweet.save
-        flash.now[:success] = I18n.t("requests.flash.tweets.create_retweet.success")
+        flash.now[:success] = I18n.t("requests.flash.tweets.create_reply_tweet.success")
         format.html
         format.js
       else
-        flash.now[:danger] = I18n.t("requests.flash.tweets.create_retweet.failure")
+        flash.now[:danger] = I18n.t("requests.flash.tweets.create_reply_tweet.failure")
         redirect_to tweets_path
       end
     end

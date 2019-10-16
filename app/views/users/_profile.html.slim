@@ -3,19 +3,14 @@ div
     thead
       tr
         th[scope="col"]
-          |
           = I18n.t("views.user_pages.profile.nickname")
         th[scope="col"]
-          |
           = I18n.t("views.user_pages.profile.tweet_count")
         th[scope="col"]
-          |
           = I18n.t("views.user_pages.profile.last_tweet")
         th[scope="col"]
-          |
           = I18n.t("views.user_pages.profile.followings")
         th[scope="col"]
-          |
           = I18n.t("views.user_pages.profile.followers")
     tbody
       tr
@@ -25,7 +20,6 @@ div
           = user.tweets.count
         td.align-middle
           - if user.tweets.blank?
-            |
             = I18n.t("views.user_pages.profile.tweet_none")
           - else
             = user.tweets.last.created_at

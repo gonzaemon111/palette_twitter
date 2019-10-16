@@ -6,13 +6,10 @@
   nav
     #nav-tab.nav.nav-tabs[role="tablist"]
       a#nav-profile-tab.nav-item.nav-link.active[data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="true"]
-        |
         = I18n.t("views.user_pages.nav_bar.profile")
       a#nav-tweets-tab.nav-item.nav-link[data-toggle="tab" href="#nav-tweets" role="tab" aria-controls="nav-tweets" aria-selected="false"]
-        |
         = I18n.t("views.user_pages.nav_bar.tweets")
       a#nav-friends-tab.nav-item.nav-link[data-toggle="tab" href="#nav-friends" role="tab" aria-controls="nav-friends" aria-selected="false"]
-        |
         = I18n.t("views.user_pages.nav_bar.friends")
   #nav-tabContent.tab-content
     #nav-profile.tab-pane.fade.show.active[role="tabpanel" aria-labelledby="nav-profile-tab" style="padding:2em;"]
@@ -35,5 +32,4 @@
             - @current_user.followers.each do |user|
               = render "follow_user", user: user
   a.btn.btn-outline-primary[href="/tweets" role="button"]
-    |
     = I18n.t("views.btn.go_to_top")

@@ -2,13 +2,11 @@
   nav
     #nav-tab.nav.nav-tabs[role="tablist"]
       a#nav-home-tab.nav-item.nav-link.active[data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true"]
-        |
         = I18n.t("views.tweets_list.all_tweets")
       a#nav-profile-tab.nav-item.nav-link[data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false"]
-        |
         = I18n.t("views.tweets_list.follow_tweets")
   #nav-tabContent.tab-content
     #nav-home.tab-pane.fade.show.active[role="tabpanel" aria-labelledby="nav-home-tab"]
       = render "tweets_list", tweets: @tweets
     #nav-profile.tab-pane.fade[role="tabpanel" aria-labelledby="nav-profile-tab"]
-      = render "tweets_list", tweets: @retweets
+      = render "tweets_list", tweets: @reply_tweets
