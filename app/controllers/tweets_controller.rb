@@ -7,7 +7,7 @@ class TweetsController < ApplicationController
       followings_ids.push user.id
     end
     reply_tweets = Tweet.includes(:user).where(user_id: followings_ids).order(updated_at: :desc)
-    @reply_tweets = TweetDecorator.decorate_collection(@reply_tweets)
+    @reply_tweets = TweetDecorator.decorate_collection(reply_tweets)
   end
 
   def new
