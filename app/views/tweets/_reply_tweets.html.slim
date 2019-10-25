@@ -1,0 +1,19 @@
+- unless @reply_tweets.empty?
+  - @reply_tweets.each do |reply_tweet|
+    li.list_item
+      h5
+        - if reply_tweet.user_id == @current_user.id
+          a href="/users/#{reply_tweet.user_id}" class="badge badge-info" style="color:white;"
+            = reply_tweet.user_nickname
+        - else
+          a href="/users/#{reply_tweet.user_id}" class="badge badge-secondary" style="color:white;"
+            = reply_tweet.user_nickname
+      a href="/tweets/#{reply_tweet.id}" class="list-group-item list-group-item-action flex-column align-items-start"
+        .d-flex.w-100.justify-content-between
+          h5.mb-1
+            = reply_tweet.content
+          small
+            = reply_tweet.updated_at
+        br
+        - if reply_tweet.image
+          = image_tag reply_tweet.image[:original].url

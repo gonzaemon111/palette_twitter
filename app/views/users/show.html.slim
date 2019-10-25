@@ -1,0 +1,35 @@
+.user_sign
+  h2[style="padding:20px;"]
+    = 
+    = I18n.t("views.user_pages.page", nickname: @user.nickname)
+  = render "follow_button"
+  nav
+    #nav-tab.nav.nav-tabs[role="tablist"]
+      a#nav-profile-tab.nav-item.nav-link.active[data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="true"]
+        = I18n.t("views.user_pages.nav_bar.profile")
+      a#nav-tweets-tab.nav-item.nav-link[data-toggle="tab" href="#nav-tweets" role="tab" aria-controls="nav-tweets" aria-selected="false"]
+        = I18n.t("views.user_pages.nav_bar.tweets")
+      a#nav-friends-tab.nav-item.nav-link[data-toggle="tab" href="#nav-friends" role="tab" aria-controls="nav-friends" aria-selected="false"]
+        = I18n.t("views.user_pages.nav_bar.friends")
+  #nav-tabContent.tab-content
+    #nav-profile.tab-pane.fade.show.active[role="tabpanel" aria-labelledby="nav-profile-tab" style="padding:2em;"]
+      = render "users/profile", user: @user
+    #nav-tweets.tab-pane.fade[role="tabpanel" aria-labelledby="nav-tweets-tab" style="padding:2em;"]
+      = render "tweets/tweets_list", tweets: TweetDecorator.decorate_collection(@user.tweets)
+    #nav-friends.tab-pane.fade[role="tabpanel" aria-labelledby="nav-friends-tab" style="padding:2em;"]
+      h3
+        = I18n.t("views.user_pages.friends.followings", nickname: @user.nickname)
+      .button_center
+        - unless @current_user.followings.empty?
+          ul.horizontal-list
+            - @current_user.followings.each do |user|
+              = render "follow_user", user: user
+      h3
+        = I18n.t("views.user_pages.friends.followers", nickname: @user.nickname)
+      .button_center
+        - unless @current_user.followers.empty?
+          ul.horizontal-list
+            - @current_user.followers.each do |user|
+              = render "follow_user", user: user
+  a.btn.btn-outline-primary[href="/tweets" role="button"]
+    = I18n.t("views.btn.go_to_top")

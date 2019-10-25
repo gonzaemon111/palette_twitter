@@ -1,0 +1,24 @@
+.list-group
+  ul
+    - unless tweets.empty?
+      - tweets.each do |tweet|
+        li.list_item
+          h5
+            - if tweet.user_id == @current_user.id
+              a href="/users/#{tweet.user_id}" class="badge badge-info" style="color:white;"
+                = tweet.user_nickname
+            - else
+              a href="/users/#{tweet.user_id}" class="badge badge-secondary" style="color:white;"
+                = tweet.user_nickname
+          a href="/tweets/#{tweet.id}" class="list-group-item list-group-item-action flex-column align-items-start"
+            .d-flex.w-100.justify-content-between
+              h5.mb-1
+                = tweet.content
+              small
+                = tweet.updated_at
+            br
+            - if tweet.image
+              = image_tag tweet.image[:original].url
+    - else
+      li.list_item
+        |  フォローしているユーザがいません。 
